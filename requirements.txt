@@ -1,0 +1,9 @@
+torch==1.2.0
+numpy==1.14.0
+sklearn==0.22.2
+fastprogress==0.2.3
+docopt==0.6.2
+transformers==3.0.2
+pandas==0.24.2
+ekphrasis
+tqdm==4.31.1
