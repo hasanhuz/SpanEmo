@@ -72,7 +72,6 @@ class SpanEmo(nn.Module):
             loss = F.binary_cross_entropy_with_logits(logits, targets).cuda()
         elif self.joint_loss == 'corr_loss':
             loss = self.corr_loss(logits, targets)
-
         y_pred = self.compute_pred(logits)
         return loss, num_rows, y_pred, targets.cpu().numpy()
 
@@ -84,13 +83,13 @@ class SpanEmo(nn.Module):
         :param reduction: whether to avg or sum loss
         :return: loss
         """
-        y_hat = y_hat.sigmoid()
         loss = torch.zeros(y_true.size(0)).cuda()
-        for idx, (y, y_h) in enumerate(zip(y_true, y_hat)):
+        for idx, (y, y_h) in enumerate(zip(y_true, y_hat.sigmoid())):
             y_z, y_o = (y == 0).nonzero(), y.nonzero()
-            output = torch.exp(torch.sub(y_h[y_z], y_h[y_o][:, None])).squeeze(-1).sum()
-            num_comparisons = y_z.size(0) * y_o.size(0)
-            loss[idx] = output.div(num_comparisons + 1e-7)
+            if y_o.nelement() != 0:
+                output = torch.exp(torch.sub(y_h[y_z], y_h[y_o][:, None]).squeeze(-1)).sum()
+                num_comparisons = y_z.size(0) * y_o.size(0)
+                loss[idx] = output.div(num_comparisons)
         return loss.mean() if reduction == 'mean' else loss.sum()
 
     @staticmethod
