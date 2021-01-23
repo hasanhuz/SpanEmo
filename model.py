@@ -10,26 +10,19 @@ class BertEncoder(nn.Module):
         :param lang: str, train bert encoder for a given language
         """
         super(BertEncoder, self).__init__()
-        self.lang = lang
         if lang == 'English':
             self.bert = BertModel.from_pretrained('bert-base-uncased')
         elif lang == 'Arabic':
             self.bert = AutoModel.from_pretrained("arabic_bert")
         elif lang == 'Spanish':
             self.bert = AutoModel.from_pretrained("spanish_bert")
-        self.feature_size = self.bert.config.hidden_size
 
     def forward(self, input_ids):
         """
         :param input_ids: list[str], list of tokenised sentences
         :return: last hidden representation, torch.tensor of shape (batch_size, seq_length, hidden_dim)
         """
-        if self.lang == 'English':
-            last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
-        elif self.lang == 'Arabic':
-            last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
-        elif self.lang == 'Spanish':
-            last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
+        last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
         return last_hidden_state
 
 
