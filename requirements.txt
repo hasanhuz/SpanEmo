@@ -1,4 +1,3 @@
-torch==1.2.0
 numpy==1.14.0
 sklearn==0.22.2
 fastprogress==0.2.3
