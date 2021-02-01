@@ -13,9 +13,9 @@ class BertEncoder(nn.Module):
         if lang == 'English':
             self.bert = BertModel.from_pretrained('bert-base-uncased')
         elif lang == 'Arabic':
-            self.bert = AutoModel.from_pretrained("arabic_bert")
+            self.bert = AutoModel.from_pretrained("asafaya/bert-base-arabic")
         elif lang == 'Spanish':
-            self.bert = AutoModel.from_pretrained("spanish_bert")
+            self.bert = AutoModel.from_pretrained("dccuchile/bert-base-spanish-wwm-uncased")
 
     def forward(self, input_ids):
         """
@@ -57,21 +57,23 @@ class SpanEmo(nn.Module):
         inputs, num_rows = inputs.to(device), inputs.size(0)
         label_idxs, targets = label_idxs[0].long().to(device), targets.long().to(device)
 
-        #prepare encoder
+        #Bert encoder
         last_hidden_state = self.bert(inputs)
 
         # FFN---> 2 linear layers---> linear layer + tanh---> linear layer
         # select span of labels to compare them with ground truth ones
         logits = self.ffn(last_hidden_state).squeeze(-1).index_select(dim=1, index=label_idxs)
 
+        #Loss Function
         if self.joint_loss == 'joint':
-            crossent = F.binary_cross_entropy_with_logits(logits, targets).cuda()
+            cel = F.binary_cross_entropy_with_logits(logits, targets).cuda()
             cl = self.corr_loss(logits, targets)
-            loss = ((1 - self.alpha) * crossent) + (self.alpha * cl)
+            loss = ((1 - self.alpha) * cel) + (self.alpha * cl)
         elif self.joint_loss == 'cross-entropy':
             loss = F.binary_cross_entropy_with_logits(logits, targets).cuda()
         elif self.joint_loss == 'corr_loss':
             loss = self.corr_loss(logits, targets)
+
         y_pred = self.compute_pred(logits)
         return loss, num_rows, y_pred, targets.cpu().numpy()
 
