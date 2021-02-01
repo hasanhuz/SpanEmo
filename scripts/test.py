@@ -47,7 +47,7 @@ model = SpanEmo(output_dropout=float(args['--output-dropout']),
                 lang=args['--lang'],
                 joint_loss=args['--loss-type'],
                 alpha=float(args['--alpha-loss']))
-learn = EvaluateOnTest(model, test_data_loader, model_path='models/' + args['--model-path'])
+learn = EvaluateOnTest(model, test_data_loader, model_path='..models/' + args['--model-path'])
 learn.predict(device=device)
 
 
