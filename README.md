@@ -18,7 +18,7 @@ The model was trained on an Nvidia GeForce GTX1080 with 11GB memory, Ubuntu 18.1
 You first need to download the dataset [Link](https://competitions.codalab.org/competitions/17751#learn_the_details-datasets) for the language of your choice  (i.e., English, Arabic or Spanish).
 
 
-You can then run the main script to do the followings:
+Then run the main script to do the followings:
  * data loading and preprocessing
  * model creation and training
 
@@ -47,7 +47,7 @@ options:
 
 
 
-Once this above step is done, you can then run the trained model on the test set using the following command.
+Once the above step is done, you can then evaluate on the test set using the trained model:
 
 ## Evaluation
 ```
