@@ -15,10 +15,10 @@ The model was trained on an Nvidia GeForce GTX1080 with 11GB memory, Ubuntu 18.1
 
 # Usage
 
-You first need to download the dataset [Link](https://competitions.codalab.org/competitions/17751#learn_the_details-datasets) for the language of your choice  (i.e., English, Arabic or Spanish) and then place them in the data directory.
+You first need to download the dataset [Link](https://competitions.codalab.org/competitions/17751#learn_the_details-datasets) for the language of your choice  (i.e., English, Arabic or Spanish) and then place them in the data directory `data/`.
 
 
-Then run the main script to do the followings:
+Next, run the main script to do the followings:
  * data loading and preprocessing
  * model creation and training
 
