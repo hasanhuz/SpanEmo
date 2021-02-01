@@ -24,7 +24,7 @@ Then run the main script to do the followings:
 
 ### Training
 ```
-python train.py 
+python scripts/train.py --train-path {} --dev-path {}
 
 options:
     -h, --help                show help message and exit
@@ -37,7 +37,7 @@ options:
     --train-batch-size=<int>  batch size 
     --eval-batch-size=<int>   batch size 
     --max-epoch=<int>         max number of epochs
-    --lr=<float>              ffn learning rate 
+    --ff-lr=<float>              ffn learning rate 
     --bert-lr=<float>         bert learning rate
     --lang=<str>              language, English|Arabic|Spanish
     --dev-path=<str>          path in which the valid set is saved
@@ -51,7 +51,7 @@ Once the above step is done, you can then evaluate on the test set using the tra
 
 ## Evaluation
 ```
-python test.py 
+python scripts/test.py 
 
 Options:
     -h --help                  show help message and exit
