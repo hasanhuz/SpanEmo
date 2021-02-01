@@ -5,7 +5,7 @@ Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification 
 
 
 # Dependencies
-This work is tested on Python 3.6 and used packages listed in the requirements file.
+We use Python=3.6, torch=1.2.0, cudatoolkit=10.0. Other packages can be installed via:
 ```angular2html
 python install -r requirements.txt
 ```
@@ -15,7 +15,7 @@ The model was trained on an Nvidia GeForce GTX1080 with 11GB memory, Ubuntu 18.1
 
 # Usage
 
-You first need to download the dataset from this [Link](https://competitions.codalab.org/competitions/17751#learn_the_details-datasets) for all three languages (English, Arabic and Spanish).
+You first need to download the dataset from this [Link](https://competitions.codalab.org/competitions/17751#learn_the_details-datasets) for your choice of  the language  (English, Arabic and Spanish).
 
 
 You can then run the main script to do the followings:
