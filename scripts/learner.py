@@ -9,7 +9,7 @@ import time
 
 class EarlyStopping:
     """Early stops the training if validation loss doesn't improve after a given patience.
-    https://github.com/Bjarten/early-stopping-pytorch"""
+    Taken from https://github.com/Bjarten/early-stopping-pytorch"""
 
     def __init__(self, filename, patience=7, verbose=True, delta=0):
         """
@@ -55,7 +55,7 @@ class EarlyStopping:
 
 class Trainer(object):
     """
-    Class to encapsulate training and validation steps for a pipeline. Based off "Tonks Library"
+    Class to encapsulate training and validation steps for a pipeline. Based off the "Tonks Library"
     :param model: PyTorch model to use with the Learner
     :param train_data_loader: dataloader for all of the training data
     :param val_data_loader: dataloader for all of the validation data
@@ -105,8 +105,12 @@ class Trainer(object):
             y_true, y_pred = pred_dict['y_true'], pred_dict['y_pred']
 
             str_stats = []
-            stats = [overall_training_loss, overall_val_loss, f1_score(y_true, y_pred, average="macro"),
-                     f1_score(y_true, y_pred, average="micro"), jaccard_score(y_true, y_pred, average="samples")]
+            stats = [overall_training_loss,
+                     overall_val_loss,
+                     f1_score(y_true, y_pred, average="macro"),
+                     f1_score(y_true, y_pred, average="micro"),
+                     jaccard_score(y_true, y_pred, average="samples")]
+
             for stat in stats:
                 str_stats.append(
                     'NA' if stat is None else str(stat) if isinstance(stat, int) else f'{stat:.4f}'
@@ -169,11 +173,10 @@ class Trainer(object):
 
 class EvaluateOnTest(object):
     """
-    Class to encapsulate training and validation steps for a pipeline. Based off the fastai learner.
-    Class based on "Tonks Library"
-    Class edited by Hassan Alhuzali on June 14, 2020
+    Class to encapsulate evaluation on the test set. Based off the "Tonks Library"
     :param model: PyTorch model to use with the Learner
     :param test_data_loader: dataloader for all of the validation data
+    :param model_path: path of the trained model
     """
     def __init__(self, model, test_data_loader, model_path):
         self.model = model
@@ -185,7 +188,7 @@ class EvaluateOnTest(object):
         Evaluate the model on a validation set
         :param device: str (defaults to 'cuda:0')
         :param pbar: fast_progress progress bar (defaults to None)
-        :returns: overall_val_loss (float), accuracies (dict{'acc': value}, preds (dict)
+        :returns: None
         """
         self.model.to(device).load_state_dict(torch.load(self.model_path))
         self.model.eval()
@@ -198,15 +201,16 @@ class EvaluateOnTest(object):
         with torch.no_grad():
             index_dict = 0
             for step, batch in enumerate(progress_bar(self.test_data_loader, parent=pbar, leave=(pbar is not None))):
-                hidden_rep, _, num_rows, y_pred, targets = self.model(batch, device)
+                _, num_rows, y_pred, targets = self.model(batch, device)
                 current_index = index_dict
-                preds_dict['y_true'][current_index: current_index + num_rows, :] = targets.cpu().numpy()
-                preds_dict['y_pred'][current_index: current_index + num_rows, :] = y_pred.cpu().numpy()
+                preds_dict['y_true'][current_index: current_index + num_rows, :] = targets
+                preds_dict['y_pred'][current_index: current_index + num_rows, :] = y_pred
                 index_dict += num_rows
 
         y_true, y_pred = preds_dict['y_true'], preds_dict['y_pred']
         str_stats = []
-        stats = [f1_score(y_true, y_pred, average="macro"), f1_score(y_true, y_pred, average="micro"),
+        stats = [f1_score(y_true, y_pred, average="macro"),
+                 f1_score(y_true, y_pred, average="micro"),
                  jaccard_score(y_true, y_pred, average="samples")]
 
         for stat in stats:
@@ -215,5 +219,4 @@ class EvaluateOnTest(object):
             )
         str_stats.append(format_time(time.time() - start_time))
         headers = ['F1-Macro', 'F1-Micro', 'JS', 'Time']
-        pbar.write(headers, table=True)
-        pbar.write(str_stats, table=True)
+        print(' '.join('{}: {}'.format(*k) for k in zip(headers, str_stats)))
