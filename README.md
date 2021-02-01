@@ -5,7 +5,7 @@ Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification 
 
 
 # Dependencies
-We use Python=3.6, torch=1.2.0, cudatoolkit=10.0. Other packages can be installed via:
+We use Python=3.6, torch=1.2.0. Other packages can be installed via:
 ```angular2html
 python install -r requirements.txt
 ```
