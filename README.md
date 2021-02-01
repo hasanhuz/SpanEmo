@@ -51,12 +51,11 @@ Once the above step is done, you can then evaluate on the test set using the tra
 
 ## Evaluation
 ```
-python scripts/test.py 
+python scripts/test.py --test-path {} --model-path {}
 
 Options:
     -h --help                  show help message and exit
     --model-path=<str>         path in which the trained model is saved
-    --loss-type=<str>          Which loss to use cross-ent|corr|joint.
     --max-length=<int>         text length
     --output-dropout=<float>   prob of dropout applied to output layer [default: 0.1]
     --seed=<int>               fixed random seed number
