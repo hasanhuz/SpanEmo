@@ -29,28 +29,28 @@ class BertEncoder(nn.Module):
 class SpanEmo(nn.Module):
     def __init__(self, output_dropout, lang='English', joint_loss='joint', alpha=0.2):
         """ casting multi-label emotion classification as span-extraction
-        :param output_dropout:
+        :param output_dropout: The dropout probability for output layer
         :param lang: encoder language
-        :param joint_loss: which loss to use ce|corr|ce+corr
-        :param alpha: control contribution of each loss function
+        :param joint_loss: which loss to use cel|corr|cel+corr
+        :param alpha: control contribution of each loss function in case of joint training
         """
         super(SpanEmo, self).__init__()
         self.bert = BertEncoder(lang=lang)
         self.joint_loss = joint_loss
         self.alpha = alpha
+        
         self.ffn = nn.Sequential(
-            nn.Linear(self.bert.feature_size, self.bert.feature_size),
+            nn.Linear(self.bert.config.hidden_size, self.bert.config.hidden_size),
             nn.Tanh(),
             nn.Dropout(p=output_dropout),
-            nn.Linear(self.bert.feature_size, 1)
+            nn.Linear(self.bert.config.hidden_size, 1)
         )
 
     def forward(self, batch, device):
         """
-        :param batch: tuple of (sentences, labels_embeddings, targets, lengths)
-        :param device: device to run calculations on (defaults to 'cuda:0')
+        :param batch: tuple of (input_ids, labels, length, label_indices)
+        :param device: device to run calculations on
         :return: loss, num_rows, y_pred, targets
-        # cls_output = output[:, 0]  #b,h
         """
         #prepare inputs and targets
         inputs, targets, lengths, label_idxs = batch
@@ -93,7 +93,7 @@ class SpanEmo(nn.Module):
                 num_comparisons = y_z.size(0) * y_o.size(0)
                 loss[idx] = output.div(num_comparisons)
         return loss.mean() if reduction == 'mean' else loss.sum()
-
+        
     @staticmethod
     def compute_pred(logits, threshold=0.5):
         """
