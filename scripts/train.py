@@ -4,7 +4,6 @@ Usage:
 
 Options:
     -h --help                         show this screen
-    --config-file=<str>               filename in which hyper-parameter should be saved. [default: config/config.json]
     --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: cross-entropy]
     --max-length=<int>                text length [default: 128]
     --output-dropout=<float>          prob of dropout applied to the output layer [default: 0.1]

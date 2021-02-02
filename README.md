@@ -26,23 +26,21 @@ Next, run the main script to do the followings:
 ```
 python scripts/train.py --train-path {} --dev-path {}
 
-options:
-    -h, --help                show help message and exit
-    --config-file             json file name to save chosen arguemnts
-    --loss-type=<str>         Which loss to use cross-ent|corr|joint 
-    --max-length=<int>        text length
-    --output-dropout=<float>  prob of dropout applied to the output layer
-    --checkpoint-path=<str>   path in which the trained model should be saved
-    --seed=<int>              fixed random seed number 
-    --train-batch-size=<int>  batch size 
-    --eval-batch-size=<int>   batch size 
-    --max-epoch=<int>         max number of epochs
-    --ff-lr=<float>              ffn learning rate 
-    --bert-lr=<float>         bert learning rate
-    --lang=<str>              language, English|Arabic|Spanish
-    --dev-path=<str>          path in which the valid set is saved
-    --train-path=<str>        path in which the train set is saved
-    --alpha-loss=<float>      alpha value
+Options:
+    -h --help                         Show this screen
+    --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: cross-entropy]
+    --max-length=<int>                text length [default: 128]
+    --output-dropout=<float>          prob of dropout applied to the output layer [default: 0.1]
+    --seed=<int>                      fixed random seed number [default: 0]
+    --train-batch-size=<int>          batch size [default: 32]
+    --eval-batch-size=<int>           batch size [default: 32]
+    --max-epoch=<int>                 max epoch [default: 20]
+    --ffn-lr=<float>                  ffn learning rate [default: 0.001]
+    --bert-lr=<float>                 bert learning rate [default: 2e-5]
+    --lang=<str>                      language choice [default: English]
+    --dev-path=<str>                  file path of the dev set [default: '']
+    --train-path=<str>                file path of the train set [default: '']
+    --alpha-loss=<float>              weight used to balance the loss [default: 0.2]
 ```
 
 
@@ -54,14 +52,13 @@ Once the above step is done, you can then evaluate on the test set using the tra
 python scripts/test.py --test-path {} --model-path {}
 
 Options:
-    -h --help                  show help message and exit
-    --model-path=<str>         path in which the trained model is saved
-    --max-length=<int>         text length
-    --output-dropout=<float>   prob of dropout applied to output layer [default: 0.1]
-    --seed=<int>               fixed random seed number
-    --test-batch-size=<int>    test set batch size [default: 32]
-    --lang=<str>               language, English|Arabic|Spanish
-    --test-path=<str>          path in which the test set is saved
+    -h --help                         show this screen
+    --model-path=<str>                Path of the trained model
+    --max-length=<int>                length of sample [default: 128]
+    --seed=<int>                      seed [default: 0]
+    --test-batch-size=<int>           batch size [default: 32]
+    --lang=<str>                      language choice [default: English]
+    --test-path=<str>                 file path of the test set [default: ]
 ```
 ***
 
