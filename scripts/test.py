@@ -4,14 +4,12 @@ Usage:
 
 Options:
     -h --help                         show this screen
-    --model-path=<str>                path of the file
-    --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: ]
+    --model-path=<str>                path of the trained model
     --max-length=<int>                length of sample [default: 128]
-    --output-dropout=<float>          prob of dropout applied to output layer [default: 0.1]
     --seed=<int>                      seed [default: 0]
     --test-batch-size=<int>           batch size [default: 32]
     --lang=<str>                      language choice [default: English]
-    --test-path=<str>                path of the directory where the file is saved [default: ]
+    --test-path=<str>                 file path of the test set [default: ]
 """
 from learner import EvaluateOnTest
 from model import SpanEmo
@@ -43,11 +41,8 @@ print('The number of Test batches: ', len(test_data_loader))
 #############################################################################
 # Run the model on a Test set
 #############################################################################
-model = SpanEmo(output_dropout=float(args['--output-dropout']),
-                lang=args['--lang'],
-                joint_loss=args['--loss-type'],
-                alpha=float(args['--alpha-loss']))
-learn = EvaluateOnTest(model, test_data_loader, model_path='..models/' + args['--model-path'])
+model = SpanEmo(lang=args['--lang'])
+learn = EvaluateOnTest(model, test_data_loader, model_path='models/' + args['--model-path'])
 learn.predict(device=device)
 
 

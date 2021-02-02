@@ -49,7 +49,6 @@ class DataClass(Dataset):
     def process_data(self):
         desc = "PreProcessing dataset {}...".format('')
         preprocessor = twitter_preprocessor()
-        data = [' '.join(preprocessor(x)) for x in tqdm(self.data, desc=desc)]
 
         if self.args['--lang'] == 'English':
             segment_a = "anger anticipation disgust fear joy love optimism hopeless sadness surprise or trust?"
@@ -65,7 +64,8 @@ class DataClass(Dataset):
                            'pesim', 'tristeza', 'sorpresa', 'confianza']
 
         inputs, lengths, label_indices = [], [], []
-        for x in tqdm(data, desc=desc):
+        for x in tqdm(self.data, desc=desc):
+            x = ' '.join(preprocessor(x))
             x = self.bert_tokeniser.encode_plus(segment_a,
                                                 x,
                                                 add_special_tokens=True,

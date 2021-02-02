@@ -4,21 +4,20 @@ Usage:
 
 Options:
     -h --help                         show this screen
-    --config-file=<str>               filename where configs is saved. [default: config/config.json]
-    --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: ]
+    --config-file=<str>               filename in which hyper-parameter should be saved. [default: config/config.json]
+    --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: cross-entropy]
     --max-length=<int>                text length [default: 128]
-    --output-dropout=<float>          prob of dropout applied to output layer [default: 0.1]
-    --checkpoint-path=<str>           filename where the trained model is saved [default: ]
+    --output-dropout=<float>          prob of dropout applied to the output layer [default: 0.1]
     --seed=<int>                      fixed random seed number [default: 0]
     --train-batch-size=<int>          batch size [default: 32]
     --eval-batch-size=<int>           batch size [default: 32]
     --max-epoch=<int>                 max epoch [default: 20]
-    --ffn-lr=<float>                      learning rate [default: 0.001]
+    --ffn-lr=<float>                  ffn learning rate [default: 0.001]
     --bert-lr=<float>                 bert learning rate [default: 2e-5]
     --lang=<str>                      language choice [default: English]
-    --dev-path=<str>                  path of the directory where the file is saved [default: '']
-    --train-path=<str>                path of the directory where the file is saved [default: '']
-    --alpha-loss=<float>             weight used to balance the loss [default: 0.2]
+    --dev-path=<str>                  file path of the dev set [default: '']
+    --train-path=<str>                file path of the train set [default: '']
+    --alpha-loss=<float>              weight used to balance the loss [default: 0.2]
 """
 
 from learner import Trainer
@@ -44,11 +43,11 @@ else:
     print("Currently using CPU")
 #####################################################################
 # Save hyper-parameter values ---> config.json
-# Save model weights --->filename.pt using current time
+# Save model weights ---> filename.pt using current time
 #####################################################################
 now = datetime.datetime.now()
 filename = now.strftime("%Y-%m-%d-%H:%M:%S")
-fw = open('../configs/' + filename + '.json', 'a')
+fw = open('configs/' + filename + '.json', 'a')
 model_path = filename + '.pt'
 args['--checkpoint-path'] = model_path
 json.dump(args, fw, sort_keys=True, indent=2)

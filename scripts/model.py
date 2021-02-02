@@ -16,6 +16,7 @@ class BertEncoder(nn.Module):
             self.bert = AutoModel.from_pretrained("asafaya/bert-base-arabic")
         elif lang == 'Spanish':
             self.bert = AutoModel.from_pretrained("dccuchile/bert-base-spanish-wwm-uncased")
+        self.feature_size = self.bert.config.hidden_size
 
     def forward(self, input_ids):
         """
@@ -27,7 +28,7 @@ class BertEncoder(nn.Module):
 
 
 class SpanEmo(nn.Module):
-    def __init__(self, output_dropout, lang='English', joint_loss='joint', alpha=0.2):
+    def __init__(self, output_dropout=0.1, lang='English', joint_loss='joint', alpha=0.2):
         """ casting multi-label emotion classification as span-extraction
         :param output_dropout: The dropout probability for output layer
         :param lang: encoder language
@@ -40,10 +41,10 @@ class SpanEmo(nn.Module):
         self.alpha = alpha
         
         self.ffn = nn.Sequential(
-            nn.Linear(self.bert.config.hidden_size, self.bert.config.hidden_size),
+            nn.Linear(self.bert.feature_size, self.bert.feature_size),
             nn.Tanh(),
             nn.Dropout(p=output_dropout),
-            nn.Linear(self.bert.config.hidden_size, 1)
+            nn.Linear(self.bert.feature_size, 1)
         )
 
     def forward(self, batch, device):
@@ -55,7 +56,7 @@ class SpanEmo(nn.Module):
         #prepare inputs and targets
         inputs, targets, lengths, label_idxs = batch
         inputs, num_rows = inputs.to(device), inputs.size(0)
-        label_idxs, targets = label_idxs[0].long().to(device), targets.long().to(device)
+        label_idxs, targets = label_idxs[0].long().to(device), targets.float().to(device)
 
         #Bert encoder
         last_hidden_state = self.bert(inputs)
