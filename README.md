@@ -27,8 +27,8 @@ Next, run the main script to do the followings:
 python scripts/train.py --train-path {} --dev-path {}
 
 Options:
-    -h --help                         Show this screen
-    --loss-type=<str>                 Which loss to use cross-ent|corr|joint. [default: cross-entropy]
+    -h --help                         show this screen
+    --loss-type=<str>                 which loss to use cross-ent|corr|joint. [default: cross-entropy]
     --max-length=<int>                text length [default: 128]
     --output-dropout=<float>          prob of dropout applied to the output layer [default: 0.1]
     --seed=<int>                      fixed random seed number [default: 0]
@@ -53,8 +53,8 @@ python scripts/test.py --test-path {} --model-path {}
 
 Options:
     -h --help                         show this screen
-    --model-path=<str>                Path of the trained model
-    --max-length=<int>                length of sample [default: 128]
+    --model-path=<str>                path of the trained model
+    --max-length=<int>                text length [default: 128]
     --seed=<int>                      seed [default: 0]
     --test-batch-size=<int>           batch size [default: 32]
     --lang=<str>                      language choice [default: English]
