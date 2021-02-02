@@ -1,7 +1,7 @@
 # SpanEmo
 ***
 
-Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification as Span-prediction"]() in EACL2021.
+Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification as Span-prediction"](https://arxiv.org/pdf/2101.10038.pdf) in EACL2021.
 
 
 # Dependencies

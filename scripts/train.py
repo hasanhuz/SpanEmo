@@ -72,7 +72,6 @@ model = SpanEmo(output_dropout=float(args['--output-dropout']),
                 lang=args['--lang'],
                 joint_loss=args['--loss-type'],
                 alpha=float(args['--alpha-loss']))
-print(model)
 #############################################################################
 # Start Training
 #############################################################################
