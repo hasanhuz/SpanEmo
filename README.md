@@ -68,7 +68,7 @@ Options:
 
 # Citation
 ```
-@inproceedings{AlhuzaliSpanEmo,  
+@inproceedings{Alhuzali2021spanemo,  
 title = "SpanEmo: Casting Multi-label Emotion Classification as Span-prediction",  
 author = "Alhuzali, Hassan and Ananiadou, Sophia",  
 booktitle = "Proceedings of the 16th conference of the European Chapter of the Association for Computational Linguistics (EACL)",  
