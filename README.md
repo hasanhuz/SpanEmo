@@ -4,7 +4,7 @@
 Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification as Span-prediction"](https://arxiv.org/pdf/2101.10038.pdf) in EACL2021.
 
 <p align="center">
-  <img src="https://github.com/hasanhuz/SpanEmo/blob/master/spanemo_arch.pdf?raw=true" alt="Photo" border="5"/> 
+  <embed src="https://github.com/hasanhuz/SpanEmo/blob/master/spanemo_arch.pdf?raw=true" type="application/pdf" border="5"/> 
 </p>
 
 # Dependencies
