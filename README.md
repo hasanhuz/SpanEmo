@@ -67,13 +67,13 @@ Options:
 ***
 
 # Citation
+Please cite the following paper if you found it useful. Thanks:)
+
 ```
-@inproceedings{Alhuzali2021spanemo,  
-title = "SpanEmo: Casting Multi-label Emotion Classification as Span-prediction",  
-author = "Alhuzali, Hassan and Ananiadou, Sophia",  
-booktitle = "Proceedings of the 16th conference of the European Chapter of the Association for Computational Linguistics (EACL)",  
-year = "2021",  
-publisher = "Association for Computational Linguistics",  
-pages = ""  
-} 
+@article{alhuzali2021spanemo,
+  title={SpanEmo: Casting Multi-label Emotion Classification as Span-prediction},
+  author={Alhuzali, Hassan and Ananiadou, Sophia},
+  journal={arXiv preprint arXiv:2101.10038},
+  year={2021}
+}
 ```
