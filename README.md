@@ -7,6 +7,7 @@ Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification 
   <img src="https://github.com/hasanhuz/SpanEmo/blob/master/SpanEmo_arch.PNG?raw=true" alt="Photo" border="5" width=40%/> 
 </p>
 
+![](https://github.com/hasanhuz/SpanEmo/blob/master/spanemo_arch.pdf)
 
 # Dependencies
 We use Python=3.6, torch=1.2.0. Other packages can be installed via:
