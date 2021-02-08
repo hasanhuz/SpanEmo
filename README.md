@@ -35,7 +35,7 @@ Options:
     --loss-type=<str>                 which loss to use cross-ent|corr|joint. [default: cross-entropy]
     --max-length=<int>                text length [default: 128]
     --output-dropout=<float>          prob of dropout applied to the output layer [default: 0.1]
-    --seed=<int>                      fixed random seed number [default: 0]
+    --seed=<int>                      fixed random seed number [default: 42]
     --train-batch-size=<int>          batch size [default: 32]
     --eval-batch-size=<int>           batch size [default: 32]
     --max-epoch=<int>                 max epoch [default: 20]
