@@ -1,7 +1,7 @@
 # SpanEmo
 ***
 
-Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification as Span-prediction"](https://arxiv.org/pdf/2101.10038.pdf) in EACL2021.
+Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification as Span-prediction"](https://www.aclweb.org/anthology/2021.eacl-main.135.pdf) in EACL2021.
 
 <p align="center">
   <img src="https://github.com/hasanhuz/SpanEmo/blob/master/SpanEmo_arch.PNG?raw=true" alt="Photo" border="5" width=40%/> 
@@ -70,10 +70,16 @@ Options:
 Please cite the following paper if you found it useful. Thanks:)
 
 ```
-@article{alhuzali2021spanemo,
-  title={SpanEmo: Casting Multi-label Emotion Classification as Span-prediction},
-  author={Alhuzali, Hassan and Ananiadou, Sophia},
-  journal={arXiv preprint arXiv:2101.10038},
-  year={2021}
+@inproceedings{alhuzali-ananiadou-2021-spanemo,
+    title = "{S}pan{E}mo: Casting Multi-label Emotion Classification as Span-prediction",
+    author = "Alhuzali, Hassan  and
+      Ananiadou, Sophia",
+    booktitle = "Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume",
+    month = apr,
+    year = "2021",
+    address = "Online",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/2021.eacl-main.135",
+    pages = "1573--1584",
 }
 ```
