@@ -1,4 +1,4 @@
-from transformers import BertModel, AutoModel
+from transformers import BertModel, AutoModel,BertConfig
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
@@ -11,7 +11,8 @@ class BertEncoder(nn.Module):
         """
         super(BertEncoder, self).__init__()
         if lang == 'English':
-            self.bert = BertModel.from_pretrained('bert-base-uncased')
+            config = BertConfig.from_pretrained("bert-base-uncased", output_hidden_states=True)
+            self.bert = BertModel.from_pretrained('bert-base-uncased',config=config)
         elif lang == 'Arabic':
             self.bert = AutoModel.from_pretrained("asafaya/bert-base-arabic")
         elif lang == 'Spanish':
@@ -23,7 +24,8 @@ class BertEncoder(nn.Module):
         :param input_ids: list[str], list of tokenised sentences
         :return: last hidden representation, torch.tensor of shape (batch_size, seq_length, hidden_dim)
         """
-        last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
+#         last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
+        last_hidden_state=self.bert(input_ids=input_ids)[0] #to get last hidden state
         return last_hidden_state
 
 
