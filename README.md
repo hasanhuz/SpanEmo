@@ -9,7 +9,7 @@ Source code for the paper ["SpanEmo: Casting Multi-label Emotion Classification 
 
 
 # Dependencies
-We use Python=3.6, torch=1.2.0. Other packages can be installed via:
+We used Python=3.6, torch=1.2.0. Other packages can be installed via:
 ```angular2html
 pip install -r requirements.txt
 ```
