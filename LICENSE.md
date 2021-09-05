@@ -162,9 +162,9 @@ NaCTeM Non-Commercial No Redistribution Software Licence
 
 Component	Version	License	Link
 
-SpanEmo		1.0	SpanEno	https://github.com/hasanhuz/spanemo/
+SpanEmo		1.0	SpanEmo	https://github.com/hasanhuz/spanemo/
 
 SpanEmo License Information
 
-Copyright (c) 2021, Hassan Alhuzali, National Centre for Text Mining, School of Computer Science, The University of Manchester.
+Copyright (c) 2021, Hassan Alhuzali, National Centre for Text Mining, Department of Computer Science, The University of Manchester.
 All rights reserved.
