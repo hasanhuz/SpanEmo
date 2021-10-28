@@ -26,7 +26,7 @@ class BertEncoder(nn.Module):
         """
         if int((transformers.__version__)[0]) == 4:
             last_hidden_state = self.bert(input_ids=input_ids).last_hidden_state
-        else: #transformers should be as indicated in the requirements.txt file
+        else: #transformers version should be as indicated in the requirements.txt file
             last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
         return last_hidden_state
 
