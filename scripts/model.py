@@ -2,6 +2,7 @@ from transformers import BertModel, AutoModel
 import torch.nn.functional as F
 import torch.nn as nn
 import torch
+import transformers 
 
 
 class BertEncoder(nn.Module):
@@ -23,7 +24,10 @@ class BertEncoder(nn.Module):
         :param input_ids: list[str], list of tokenised sentences
         :return: last hidden representation, torch.tensor of shape (batch_size, seq_length, hidden_dim)
         """
-        last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
+        if int((transformers.__version__)[0]) == 4:
+            last_hidden_state = self.bert(input_ids=input_ids).last_hidden_state
+        else: #transformers should be as indicated in the requirements.txt file
+            last_hidden_state, pooler_output = self.bert(input_ids=input_ids)
         return last_hidden_state
 
 
